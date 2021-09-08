@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperales <jperales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 16:42:44 by jperales          #+#    #+#             */
-/*   Updated: 2021/09/05 17:55:42 by jperales         ###   ########.fr       */
+/*   Created: 2021/08/31 17:21:22 by jperales          #+#    #+#             */
+/*   Updated: 2021/09/08 17:22:56 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
-	int		s;
-	long	res;
+	char	*dest;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	s = 1;
-	res = 0;
-	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+	if (!s1 || !set)
+		return (0);
+	j = ft_strlen(s1);
+	while (s1[i] != '\0' && ft_strchr(set, s1[i]))
 		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			s = s * -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = (str[i] - '0') + (res * 10);
-		if (res * s < -2147483648 || res * s > 2147483648)
-			return ((res * s < -2147483648) - 1);
-		i++;
-	}
-	return (res * s);
+	while (j && ft_strchr(set, s1[j]))
+		j--;
+	dest = ft_substr(s1, i, (j - i + 1));
+	return (dest);
 }

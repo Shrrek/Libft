@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperales <jperales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 16:42:44 by jperales          #+#    #+#             */
-/*   Updated: 2021/09/05 17:55:42 by jperales         ###   ########.fr       */
+/*   Created: 2021/09/05 16:57:34 by jperales          #+#    #+#             */
+/*   Updated: 2021/09/08 16:37:16 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int		i;
-	int		s;
-	long	res;
+	t_list	*aux;
 
-	i = 0;
-	s = 1;
-	res = 0;
-	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (!new)
+		return ;
+	if (!*lst)
 	{
-		if (str[i] == '-')
-			s = s * -1;
-		i++;
+		*lst = new;
+		return ;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = (str[i] - '0') + (res * 10);
-		if (res * s < -2147483648 || res * s > 2147483648)
-			return ((res * s < -2147483648) - 1);
-		i++;
-	}
-	return (res * s);
+	aux = ft_lstlast(*lst);
+	aux -> next = new;
 }

@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperales <jperales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 16:42:44 by jperales          #+#    #+#             */
-/*   Updated: 2021/09/05 17:55:42 by jperales         ###   ########.fr       */
+/*   Created: 2021/08/31 19:02:44 by jperales          #+#    #+#             */
+/*   Updated: 2021/09/01 12:05:10 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int		i;
-	int		s;
-	long	res;
+	int	i;
 
 	i = 0;
-	s = 1;
-	res = 0;
-	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	while (!s)
+		return ;
+	while (s[i])
 	{
-		if (str[i] == '-')
-			s = s * -1;
+		ft_putchar_fd(s[i], fd);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = (str[i] - '0') + (res * 10);
-		if (res * s < -2147483648 || res * s > 2147483648)
-			return ((res * s < -2147483648) - 1);
-		i++;
-	}
-	return (res * s);
 }

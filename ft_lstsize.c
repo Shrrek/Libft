@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperales <jperales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/30 16:42:44 by jperales          #+#    #+#             */
-/*   Updated: 2021/09/05 17:55:42 by jperales         ###   ########.fr       */
+/*   Created: 2021/09/04 19:36:22 by jperales          #+#    #+#             */
+/*   Updated: 2021/09/04 20:11:49 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_lstsize(t_list *lst)
 {
 	int		i;
-	int		s;
-	long	res;
 
 	i = 0;
-	s = 1;
-	res = 0;
-	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	while (lst != NULL)
 	{
-		if (str[i] == '-')
-			s = s * -1;
+		lst = lst -> next;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = (str[i] - '0') + (res * 10);
-		if (res * s < -2147483648 || res * s > 2147483648)
-			return ((res * s < -2147483648) - 1);
-		i++;
-	}
-	return (res * s);
+	return (i);
 }
